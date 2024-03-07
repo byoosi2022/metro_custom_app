@@ -196,6 +196,8 @@ doc_events = {
 # User Data Protection
 # --------------------
 
+fixtures = ["Client Script"]
+
 # user_data_fields = [
 # 	{
 # 		"doctype": "{doctype_1}",
