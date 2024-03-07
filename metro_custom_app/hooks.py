@@ -116,13 +116,23 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
+doc_events = {
 # 	"*": {
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
 # 	}
-# }
+ "Sales Order": {
+        "on_submit": "metro_custom_app.api.create_purchase_invoice"
+    },
+"Sales Invoice": {
+    "on_submit": [
+        "metro_custom_app.api.create_purchase_invoice",
+        "metro_custom_app.api.create_purchase_invoice_landlord"
+    ]
+}
+
+ }
 
 # Scheduled Tasks
 # ---------------
