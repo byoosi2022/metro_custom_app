@@ -11,6 +11,7 @@ app_license = "MIT"
 # include js, css files in header of desk.html
 # app_include_css = "/assets/metro_custom_app/css/metro_custom_app.css"
 # app_include_js = "/assets/metro_custom_app/js/metro_custom_app.js"
+app_include_js = "/assets/metro_custom_app/js/custom/button.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/metro_custom_app/css/metro_custom_app.css"
@@ -125,12 +126,28 @@ doc_events = {
  "Sales Order": {
         "on_submit": "metro_custom_app.api.create_purchase_invoice"
     },
+#   "Item": {
+      
+#         "on_update": "metro_custom_app.custom_api.items.post_item"
+#     },
+  
+  "Purchase Order": {
+      
+        "on_submit": [
+            "metro_custom_app.custom_api.purchase_order.update_item_price",
+            "metro_custom_app.custom_api.update_margin_percent.profit_margin_percentage",
+            
+            ]
+    },
+  
 "Sales Invoice": {
     "on_submit": [
         "metro_custom_app.api.create_purchase_invoice",
         "metro_custom_app.api.create_purchase_invoice_landlord"
-    ]
+    ],
+    "validate": "metro_custom_app.custom_api.validate_drafts.validate_sales_invoice"
 }
+
 
  }
 
@@ -196,7 +213,11 @@ doc_events = {
 # User Data Protection
 # --------------------
 
-fixtures = ["Client Script"]
+fixtures = [
+    {"dt": "Client Script", "filters": [["module", "=", "Metro Custom App"]]},
+    {"dt": "Custom Field", "filters": [["module", "=", "Metro Custom App"]]}
+]
+
 
 # user_data_fields = [
 # 	{

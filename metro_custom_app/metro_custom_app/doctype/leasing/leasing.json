@@ -1,0 +1,167 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-03-09 12:58:08.900906",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "invoice",
+  "supplier",
+  "court_name",
+  "tenant_name",
+  "house_model",
+  "column_break_phdb1",
+  "amount_figures",
+  "amount_in_word",
+  "amount_approved",
+  "beneficially_details_section",
+  "account_name",
+  "account_number",
+  "column_break_d4vjz",
+  "bank",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "court_name",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Court Name"
+  },
+  {
+   "fieldname": "house_model",
+   "fieldtype": "Data",
+   "label": "House Model"
+  },
+  {
+   "fieldname": "column_break_phdb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tenant_name",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Tenant's Name",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "amount_figures",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Amount in Figures",
+   "read_only": 1
+  },
+  {
+   "fieldname": "beneficially_details_section",
+   "fieldtype": "Section Break",
+   "label": "Beneficially Details"
+  },
+  {
+   "fieldname": "account_name",
+   "fieldtype": "Data",
+   "label": "Account Name"
+  },
+  {
+   "fieldname": "account_number",
+   "fieldtype": "Data",
+   "label": "Account Number"
+  },
+  {
+   "fieldname": "column_break_d4vjz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank",
+   "fieldtype": "Data",
+   "label": "Bank"
+  },
+  {
+   "fieldname": "amount_in_word",
+   "fieldtype": "Data",
+   "label": "Amount in Word",
+   "read_only": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "MC-LSE-.YYYY.-"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Leasing",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Link",
+   "label": "Invoice",
+   "options": "Purchase Invoice"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "amount_approved",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount Approved"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-03-14 17:56:27.504746",
+ "modified_by": "Administrator",
+ "module": "Metro Custom App",
+ "name": "Leasing",
+ "name_case": "Title Case",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "supplier"
+}
