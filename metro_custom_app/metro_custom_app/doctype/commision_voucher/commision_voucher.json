@@ -10,6 +10,7 @@
  "field_order": [
   "naming_series",
   "invoice",
+  "sales_order_no",
   "beneficiary",
   "court",
   "unit_sold",
@@ -143,7 +144,7 @@
   {
    "fieldname": "grand_total",
    "fieldtype": "Currency",
-   "label": "Grand Total"
+   "label": "Invoice Grand Total"
   },
   {
    "fieldname": "tax_invoice",
@@ -153,12 +154,18 @@
   {
    "fieldname": "column_break_flyjo",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sales_order_no",
+   "fieldtype": "Link",
+   "label": "Sales Order No",
+   "options": "Sales Order"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-03-19 12:43:59.436078",
+ "modified": "2024-09-20 13:43:19.327449",
  "modified_by": "Administrator",
  "module": "Metro Custom App",
  "name": "Commision Voucher",

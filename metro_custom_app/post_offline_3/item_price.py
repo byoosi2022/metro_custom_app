@@ -1,11 +1,11 @@
 import json
 import requests
 import frappe
-from metro_custom_app.utils import get_api_keys1
+from metro_custom_app.utils import get_api_keys2
 
 def get_item_price(item_code, price_list, headers):
     try:
-        response = requests.get(f"http://102.216.33.196/api/resource/Item Price/{item_code}?filters=[['price_list', '=', '{price_list}']]", headers=headers)
+        response = requests.get(f"http://168.253.118.177/api/resource/Item Price/{item_code}?filters=[['price_list', '=', '{price_list}']]", headers=headers)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as http_err:
@@ -20,7 +20,7 @@ def get_item_price(item_code, price_list, headers):
 @frappe.whitelist()
 def create_or_update_item_price(docname):
     try:
-        api_keys = get_api_keys1()
+        api_keys = get_api_keys2()
         if not api_keys or not api_keys[0]:
             frappe.msgprint("Failed to get API keys for the server")
             return
@@ -40,7 +40,7 @@ def create_or_update_item_price(docname):
             "Content-Type": "application/json",
             "Authorization": f"token {api_keys[0][0]}:{api_keys[0][1]}"
         }
-        server = "http://102.216.33.196/api/resource"
+        server = "http://168.253.118.177/api/resource"
 
         # Check if the item price exists
         existing_item_price = get_item_price(item_price_doc.item_code, item_price_doc.price_list, headers)

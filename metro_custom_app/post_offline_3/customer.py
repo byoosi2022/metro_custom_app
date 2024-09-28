@@ -1,11 +1,11 @@
 import json
 import requests
 import frappe
-from metro_custom_app.utils import get_api_keys1
+from metro_custom_app.utils import get_api_keys2
 
 def get_customer(docname, headers):
     try:
-        response = requests.get(f"http://102.216.33.196/api/resource/Customer/{docname}", headers=headers, timeout=10)
+        response = requests.get(f"http://168.253.118.177/api/resource/Customer/{docname}", headers=headers)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.HTTPError as http_err:
@@ -20,7 +20,7 @@ def get_customer(docname, headers):
 @frappe.whitelist()
 def create_or_update_customer(docname):
     try:
-        api_keys = get_api_keys1()
+        api_keys = get_api_keys2()
         if not api_keys or not api_keys[0]:
             frappe.msgprint("Failed to get API keys for the server")
             return
@@ -40,23 +40,21 @@ def create_or_update_customer(docname):
 
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"token {api_keys[0][0]}:{api_keys[0][1]}",
-            "Expect": ""  # Remove Expect header
+            "Authorization": f"token {api_keys[0][0]}:{api_keys[0][1]}"
         }
-
-        server = "http://102.216.33.196/api/resource"
+        server = "http://168.253.118.177/api/resource"
 
         # Check if the customer exists
         existing_customer = get_customer(docname, headers)
 
         if existing_customer:
             # Customer exists, update it
-            put_response = requests.put(f"{server}/Customer/{docname}", headers=headers, data=json_data, timeout=10)
+            put_response = requests.put(f"{server}/Customer/{docname}", headers=headers, data=json_data)
             put_response.raise_for_status()
             frappe.msgprint(f"Customer '{docname}' updated successfully.")
         else:
             # Customer does not exist, create it
-            post_response = requests.post(f"{server}/Customer", headers=headers, data=json_data, timeout=10)
+            post_response = requests.post(f"{server}/Customer", headers=headers, data=json_data)
             post_response.raise_for_status()
             frappe.msgprint("Customer created successfully")
     except requests.exceptions.HTTPError as http_err:

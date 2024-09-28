@@ -116,40 +116,34 @@ app_include_js = "/assets/metro_custom_app/js/custom/button.js"
 # Document Events
 # ---------------
 # Hook on document methods and events
-
 doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
- "Sales Order": {
-        "on_submit": "metro_custom_app.api.create_purchase_invoice"
-    },
-#   "Item": {
-      
-#         "on_update": "metro_custom_app.custom_api.items.post_item"
-#     },
-  
-  "Purchase Order": {
-      
-        "on_submit": [
+    'Purchase Order': {
+        'before_save': "metro_custom_app.custom_api.budget.budget_limit.validate_budget",
+        'on_submit': [
             "metro_custom_app.custom_api.purchase_order.update_item_price",
             "metro_custom_app.custom_api.update_margin_percent.profit_margin_percentage",
-            
-            ]
+        ]
     },
-  
-"Sales Invoice": {
-    "on_submit": [
-        "metro_custom_app.api.create_purchase_invoice",
-        "metro_custom_app.api.create_purchase_invoice_landlord"
-    ],
-    "validate": "metro_custom_app.custom_api.validate_drafts.validate_sales_invoice"
+    'Purchase Invoice': {
+        'before_save': "metro_custom_app.custom_api.budget.budget_limit.validate_budget"
+    },
+    'Expense Claim': {
+        'before_save': "metro_custom_app.custom_api.budget.budget_limit.validate_budget"
+    },
+    'Sales Order': {
+        'on_submit': "metro_custom_app.api.create_purchase_invoice"
+    },
+    'Sales Invoice': {
+        'on_submit': [
+            "metro_custom_app.api.create_purchase_invoice",
+            "metro_custom_app.api.create_purchase_invoice_landlord"
+        ],
+        'validate': "metro_custom_app.custom_api.validate_drafts.validate_sales_invoice"
+    },
+    'Payment Request': {
+        'onload': "metro_custom_app.custom_api.update_status.update_custom_status"
+    }
 }
-
-
- }
 
 # Scheduled Tasks
 # ---------------

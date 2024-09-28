@@ -69,6 +69,23 @@ frappe.ui.form.on('Purchase Receipt', {
             },
             __("Post")
         );
+        frm.add_custom_button(
+            __("Post Receipt to Server 3"),
+            function () {
+                frappe.call({
+                    method: 'metro_custom_app.post_offline_3.purchase_reciept.post_purchase_receipts',
+                    args:{
+                        docname: frm.doc.name
+                    },
+                    callback: function(response) {
+                        console.log(response)
+                        frappe.msgprint(response.message);
+                    }
+                });
+                
+            },
+            __("Post")
+        );
     }
     }
 });
@@ -98,6 +115,22 @@ frappe.ui.form.on('Stock Reconciliation', {
             function () {
                 frappe.call({
                     method: 'metro_custom_app.post_offline.stock_reconsilation.post_stock_reconciliation',
+                    args:{
+                        docname: frm.doc.name
+                    },
+                    callback: function(response) {
+                        frappe.msgprint(response.message);
+                    }
+                });
+                
+            },
+            __("Post")
+        );
+        frm.add_custom_button(
+            __("Post Reconciliation to Server 3"),
+            function () {
+                frappe.call({
+                    method: 'metro_custom_app.post_offline_3.stock_reconsilation.post_stock_reconciliation',
                     args:{
                         docname: frm.doc.name
                     },
@@ -150,6 +183,23 @@ frappe.ui.form.on('Stock Entry', {
             },
             __("Post")
         );
+
+        frm.add_custom_button(
+            __("Post Stock Transfer to Server 3"),
+            function () {
+                frappe.call({
+                    method: 'metro_custom_app.post_offline_3.stock_entry.post_stock_entry',
+                    args:{
+                        docname: frm.doc.name
+                    },
+                    callback: function(response) {
+                        frappe.msgprint(response.message);
+                    }
+                });
+                
+            },
+            __("Post")
+        );
     }
     
     }
@@ -190,6 +240,22 @@ frappe.ui.form.on('Item', {
             },
             __("Post")
         );
+        frm.add_custom_button(
+            __("Post Item to Server 3"),
+            function () {
+                frappe.call({
+                    method: 'metro_custom_app.post_offline_3.item_creation.create_item',
+                    args:{
+                        docname: frm.doc.name
+                    },
+                    callback: function(response) {
+                        frappe.msgprint(response.message);
+                    }
+                });
+                
+            },
+            __("Post")
+        );
 
     }
 });
@@ -219,6 +285,22 @@ frappe.ui.form.on('Purchase Order', {
                 function () {
                     frappe.call({
                         method: 'metro_custom_app.post_offline.item_price_order.post_item_price',
+                        args:{
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            frappe.msgprint(response.message);
+                        }
+                    });
+                },
+                __("Post")
+            );
+
+            frm.add_custom_button(
+                __("Update Item Prices server 3"),
+                function () {
+                    frappe.call({
+                        method: 'metro_custom_app.post_offline_3.item_price_order.post_item_price',
                         args:{
                             docname: frm.doc.name
                         },
@@ -271,6 +353,22 @@ frappe.ui.form.on('Supplier', {
                 __("Post")
             );
 
+            frm.add_custom_button(
+                __("Update Supplier server 3"),
+                function () {
+                    frappe.call({
+                        method: 'metro_custom_app.post_offline_3.supplier.create_or_update_supplier',
+                        args:{
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            frappe.msgprint(response.message);
+                        }
+                    });
+                },
+                __("Post")
+            );
+
 
         
     }
@@ -304,6 +402,23 @@ frappe.ui.form.on('Customer', {
                             docname: frm.doc.name
                         },
                         callback: function(response) {
+                            frappe.msgprint(response.message);
+                        }
+                    });
+                },
+                __("Post")
+            );
+
+            frm.add_custom_button(
+                __("Update Customer server 3"),
+                function () {
+                     frappe.call({
+                        method: 'metro_custom_app.post_offline_3.customer.create_or_update_customer',
+                        args:{
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            console.log("response")
                             frappe.msgprint(response.message);
                         }
                     });
@@ -351,8 +466,23 @@ frappe.ui.form.on('Item Price', {
                 __("Post")
             );
 
+            frm.add_custom_button(
+                __("Update Item Price server 3"),
+                function () {
+                    frappe.call({
+                        method: 'metro_custom_app.post_offline_3.item_price.create_or_update_item_price',
+                        args:{
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            frappe.msgprint(response.message);
+                        }
+                    });
+                },
+                __("Post")
+            );
 
-        
+
     }
 });
 
@@ -390,11 +520,74 @@ frappe.ui.form.on('User', {
                 },
                 __("Post")
             );
+            frm.add_custom_button(
+                __("Update User server 3"),
+                function () {
+                    frappe.call({
+                        method: 'metro_custom_app.post_offline_3.user.post_users',
+                        args:{
+                            docname: frm.doc.name
+                        },
+                        callback: function(response) {
+                            frappe.msgprint(response.message);
+                        }
+                    });
+                },
+                __("Post")
+            );
+
 
 
         
     }
 });
+
+frappe.ui.form.on('Lead', {
+    refresh: function(frm) {
+                   
+            frm.add_custom_button(
+                __("Update User server 1"),
+                function () {
+                    frappe.call({
+                        method: 'metro_custom_app.post_offline_1.Lead.create_lead',
+                        // args:{
+                        //     docname: frm.doc.name
+                        // },
+                        callback: function(response) {
+                            frappe.msgprint(response.message);
+                        }
+                    });
+                },
+                __("Post")
+            );
+
+
+        
+    }
+});
+
+
+// frappe.ui.form.on('Payment Request', {
+//     onload: function(frm) {
+//         // Check if custom_status field is not set
+//         if (!frm.doc.custom_status) {
+//             frappe.call({
+//                 method: 'metro_custom_app.custom_api.update_status.update_custom_status',
+//                 args: {
+//                     payment_request_name: frm.doc.name
+//                 },
+//                 callback: function(response) {
+//                     if (response.message.status === 'success') {
+//                         frm.reload_doc(); // Reload the document to reflect the changes
+//                     } else {
+//                         frappe.msgprint(__('Error: ' + response.message.message));
+//                     }
+//                 }
+//             });
+//         }
+//     }
+// });
+
 
 
 

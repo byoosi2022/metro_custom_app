@@ -3,23 +3,48 @@ from frappe.utils import get_url_to_form
 
 def create_purchase_invoice(doc, method):
     if doc.sales_partner:
-        purchase_invoice = frappe.new_doc('Purchase Invoice')
-        purchase_invoice.supplier = doc.sales_partner
-        purchase_invoice.company = doc.company  # Set the company
-        purchase_invoice.custom_invoice_grand_total = doc.grand_total
-        purchase_invoice.append('items', {
-            'item_code': 'Commission',
-            'rate': doc.total_commission,
-            'qty': 1
-        })
-        purchase_invoice.save()
-        # purchase_invoice.submit()
-        
-        # Get the URL to the Purchase Invoice form
-        purchase_invoice_url = get_url_to_form('Purchase Invoice', purchase_invoice.name)
-        
-        # Show message with Purchase Invoice ID and link at the bottom
-        frappe.msgprint(f"Purchase Invoice {purchase_invoice.name} created. <a href='{purchase_invoice_url}'>View Purchase Invoice</a>", alert=True)
+        try:
+            # Create a new Purchase Invoice document
+            purchase_invoice = frappe.new_doc('Purchase Invoice')
+            
+            # Set fields for the Purchase Invoice
+            purchase_invoice.supplier = doc.sales_partner
+            purchase_invoice.custom_sales_partner = doc.sales_partner
+            purchase_invoice.custom_court = doc.custom_court
+            purchase_invoice.custom_commission_rate = doc.commission_rate
+            purchase_invoice.company = doc.company  # Set the company
+            purchase_invoice.custom_invoice_grand_total = doc.grand_total
+            
+            # Set Sales Invoice ID or Sales Order ID based on the document type
+            if doc.doctype == "Sales Invoice":
+                purchase_invoice.custom_sales_invoice_id = doc.name
+            elif doc.doctype == "Sales Order":
+                purchase_invoice.custom_sales_order_id = doc.name
+
+            # Append commission item to the Purchase Invoice
+            purchase_invoice.append('items', {
+                'item_code': 'Commission',
+                'rate': doc.total_commission,
+                'qty': 1
+            })
+            
+            # Save the Purchase Invoice
+            purchase_invoice.save()
+            
+            # Optionally, submit the Purchase Invoice
+            # purchase_invoice.submit()
+            
+            # Get the URL to the newly created Purchase Invoice
+            purchase_invoice_url = get_url_to_form('Purchase Invoice', purchase_invoice.name)
+            
+            # Show a message with a link to view the Purchase Invoice
+            frappe.msgprint(f"Purchase Invoice {purchase_invoice.name} created. <a href='{purchase_invoice_url}'>View Purchase Invoice</a>", alert=True)
+
+        except Exception as e:
+            # Show an error message if something goes wrong
+            frappe.msgprint(f"Error creating Purchase Invoice: {str(e)}", alert=True)
+            # Optionally log the error for debugging
+            frappe.log_error(f"Error creating Purchase Invoice: {str(e)}", "Purchase Invoice Creation Error")
 
 import json
 @frappe.whitelist()

@@ -26,7 +26,7 @@ def profit_margin_percentage(doc, method):
 def get_custom_profit_margin(item_code):
     item = frappe.get_doc("Item", item_code)
     if item:
-        return item.custom_profit_margin, item.custom_sales_price
+        return {"margin":item.custom_profit_margin, "sales_price":item.custom_sales_price}
     return None, None
 
 

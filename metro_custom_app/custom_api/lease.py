@@ -24,6 +24,7 @@ def create_sales_invoice_from_lease(lease_name):
         sales_invoice.customer = si_customer
         sales_invoice.custom_land_name = customer
         sales_invoice.company = lease.company
+        sales_invoice.cost_center = "Main - MACL"
         sales_invoice.append("items", {
             "item_code": schedule.get("lease_item_name"),
             "qty": schedule.get("qty"),

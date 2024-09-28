@@ -18,6 +18,8 @@
   "amount_figures",
   "amount_in_word",
   "amount_approved",
+  "customer",
+  "sales_partner",
   "beneficially_details_section",
   "account_name",
   "account_number",
@@ -119,12 +121,24 @@
    "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Amount Approved"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "sales_partner",
+   "fieldtype": "Link",
+   "label": "Sales Partner",
+   "options": "Sales Partner"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-03-14 17:56:27.504746",
+ "modified": "2024-09-20 13:08:55.740690",
  "modified_by": "Administrator",
  "module": "Metro Custom App",
  "name": "Leasing",
